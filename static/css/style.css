@@ -35,4 +35,29 @@
   background: #ff6437;
 }
 
+#logo {
+  width:25%;
+}
+
+@media (max-width: 992px) {
+  #logo {
+    width:50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #logo {
+    width:75%;
+  }
+  #bottom-margin {
+    margin-bottom: 3rem !important;
+  }
+}
+
+.noUi-state-tap .noUi-connect,
+.noUi-state-tap .noUi-origin {
+  -webkit-transition: transform .75s !important;
+  transition: transform .75s !important;
+}
+
 

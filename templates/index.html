@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="../static/css/nouislider.min.css">
 
   <!-- Include required js elements for Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   <!-- Include required js elements for JustGage -->
   <script src="../static/js/justgage.js"></script>
@@ -51,7 +51,7 @@
     <div class="row">
       <!-- Div for logo -->
       <div class="col-md-12 text-center pt-4 mb-3">
-        <img src="../static/images/amplify_2000.png" style="width:25%"></img>
+        <img src="../static/images/amplify_2000.png" id="logo"></img>
         <hr class="my-4">
       </div>
     </div>
@@ -71,6 +71,12 @@
                   <label for="tip">Show Date</label>
                   <input class="form-control" id="show-date" type="text">
                   <p></p>
+                  <label for="room">Room:&nbsp;&nbsp;&nbsp;&nbsp;
+                  </label>
+                  <label class="radio-inline"><input type="radio" name="optradio" id="large-room" checked> Large Room&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                  <label class="radio-inline"><input type="radio" name="optradio" id="small-bar"> Small Bar</label>
+                  <p></p>
+
                   <!-- Calculate and Clear buttons -->
                   <button id="predict-btn" type="submit" class="btn btn-primary">Predict!</button>
                   <button id="clear-btn" type="reset" class="btn btn-outline-danger">Clear</button>
@@ -119,8 +125,19 @@
           <div class="row">
             <div class="col-md-12" style="text-align:center">
               <span>Ticket Price</span>
-              <div id="price-slider" style="margin:auto" class="mt-1 mb-5">
+              <a tabindex="0" id="popover" data-html="true" data-toggle="popover" data-trigger="focus" 
+              data-content="<strong>Warning: </strong>The model will suggest a ticket price based on historical data. Changing this price will recalculate revenue, 
+              but be aware that attendance may also be affected by altering the ticket price.">
+              <img src="../static/images/info.png" style="height: .7rem; width: .7rem; vertical-align:inherit; opacity:0.9;"></a>
+
+              <div id="price-slider" style="margin:auto" class="mt-1 mb-0">
                 <!-- Insert slider for ticket price here -->
+              </div>
+              <!-- Div for price display -->
+              <div class="mt-1" id="bottom-margin">
+                <span id="price">
+                    <!-- Price value -->
+                </span>
               </div>
             </div>
           </div>

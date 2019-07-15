@@ -363,6 +363,13 @@ function handleClear(event) {
   totalRevenueGage.refresh(0);
   ticketRevenueGage.refresh(0);
   barRevenueGage.refresh(0);
+
+  // Reset slider
+  slider.noUiSlider.reset();
+
+  // Check first radio button
+  document.getElementById("large-room").checked = true;
+
 }
 
 
@@ -505,7 +512,9 @@ slider.style.background = '#edebeb';
 
 // Create slider
 noUiSlider.create(slider, {
-  start: 25,
+  animate: true,
+  animationDuration: 750,
+  start: 0,
   connect: 'lower',
   // define price range
   range: {
@@ -516,7 +525,14 @@ noUiSlider.create(slider, {
   // tooltips: true
   });
 
+var price = +slider.noUiSlider.get();
+var priceDisplay = document.getElementById('price')
+// Set initial price displayed
+priceDisplay.innerHTML = price;
   
+slider.noUiSlider.on('update', function (values, handle) {
+  priceDisplay.innerHTML = `$${+values[handle]}`;
+});
 
 
 
@@ -526,3 +542,10 @@ var clearButton = d3.select("#clear-btn");
 // Define Clear Filter button action
 clearButton.on("click",handleClear);
 
+// Enable popovers
+$('#popover').popover();
+
+// Dismiss popover on loss of focus
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
