@@ -1,0 +1,38 @@
+.container {
+    width: 100%;
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+@media (min-width: 576px) {
+    .container {
+      max-width: 768px !important;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 992px !important;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 1200px !important;
+    }
+  }
+  
+
+@media (min-width: 1200px) {
+    .container {
+      max-width: 1600px !important;
+    }
+  }
+
+#price-slider .noUi-connect {
+  background: #ff6437;
+}
+
+
