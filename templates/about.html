@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>amplify</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+
+  <!-- Include required js elements for Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-custom navbar-expand-sm navbar-dark bg-primary">
+    <a class="navbar-brand" href="index.html"><img src="../static/images/amplify_logo.png" style="height:30px"></img></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link active" href="about.html">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="support.html">Support</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Main container for page content -->
+  <div class="container">
+    <div class="row">
+      <!-- Div for logo -->
+      <div class="col-md-12 text-center pt-4 mb-3">
+        <img src="../static/images/amplify_2000.png" id="logo"></img>
+        <hr class="my-4">
+      </div>
+    </div>
+    <!-- Div for app summary -->
+    <div style="text-align:center">
+        <h4>The <strong>amplify</strong> team believes in the power of live music.  This project was born out of a desire to see live music continue to thrive.  
+            To that end, <strong>amplify</strong> empowers venues to make informed decisions when booking shows to ensure financial viability and continued 
+            success of the live music scene.</h4>
+    </div>
+    <div class="col-11 col-centered">
+        <hr class="my-5">
+    </div>
+    <div>
+        <h5 style="text-align:center"><strong>About the App</strong></h5><br />
+        <h6><strong>amplify</strong> was built using historical data from local music venues, as well as artist data from Spotify(R).  
+            A machine learning model was trained on this data, allowing accurate predictions of ticket sales and revenue, 
+            taking into account various factors including artist popularity, genre, fan demographics, and even the 
+            month and day of week of the show.</h6>
+        <div class="col-11 col-centered">
+            <hr class="my-5">
+        </div>
+        <h5 style="text-align:center"><strong>Technology Used</strong></h5><br />
+        <ul>
+            <li><h6 id="bullet-spacing">Initial data cleaning was performed using Python and the pandas library</h6></li>
+            <li><h6 id="bullet-spacing">Data warehousing is handled using a SQLite database</h6></li>
+            <li><h6 id="bullet-spacing">A Flask application is used to handle queries to the database and return data to be displayed on the dashboard</h6></li>
+            <li><h6 id="bullet-spacing">The app front-end was designed using Bootstrap along with multiple JavaScript libraries, including jQuery, Popper.js, and noUiSlider</h6></li>
+            <li><h6 id="bullet-spacing">The finished app has been deployed on Heroku</h6></li>
+        </ul>
+        <div class="col-11 col-centered">
+            <hr class="my-5">
+        </div>
+        <h5 style="text-align:center"><strong>About the Team</strong></h5><br />
+        <!-- Mike Bowen -->
+        <div class="row vertical-align mb-5">
+            <div class="col-4 col-md-2">
+                <a href="https://www.linkedin.com/in/michael-bowen-77513340/"><img src="../static/images/mike_bowen.png" alt="Mike Bowen" style="width:100%;" ></a>
+            </div>
+            <div class="col-8 col-md-10">
+                <h6>
+                    <strong>Mike Bowen</strong><p></p>
+                    Mike is the Head of Data Foundations / Marketing Sciences at Spotify, and is a quantitative researcher and 
+                    data storyteller with 15 years of experience designing and conducting research for many of the world’s most recognized brands.
+                </h6>
+            </div>
+        </div>
+
+        <div class="col-7 col-centered">
+            <hr class="my-4">
+        </div>
+    
+        <!-- Justin Coulter -->
+        <div class="row vertical-align mb-5">
+            <div class="col-8 col-md-10">
+                <h6 style="text-align:right">
+                    <strong>Justin Coulter</strong><p></p>
+                    Justin is a former Artist/Fabricator turned Data Scientist, with a natural inclination towards unique perspectives
+                    and a proclivity for creative problem-solving.
+                </h6>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="https://www.linkedin.com/in/justin-coulter-69641817a/"><img src="../static/images/justin_coulter.png" alt="Justin Coulter" style="width:100%;" ></a>
+            </div>
+        </div>
+
+        <div class="col-7 col-centered">
+            <hr class="my-4">
+        </div>
+
+        <!-- Andrew Swellie -->
+        <div class="row vertical-align mb-5">
+            <div class="col-4 col-md-2">
+                <a href="https://www.linkedin.com/in/andrewswellie/"><img src="../static/images/andrew_swellie.png" alt="Andrew Swellie" style="width:100%;" ></a>
+            </div>
+            <div class="col-8 col-md-10">
+                <h6>
+                    <strong>Andrew Swellie</strong><p></p>
+                    Andy is a Data Scientist with 12+ years experience in Product Management and Business Development.  
+                    He also has extensive experience with statistical testing and data analysis.
+                </h6>
+            </div>
+        </div>
+
+        <div class="col-7 col-centered">
+            <hr class="my-4">
+        </div>
+
+        <!-- Robert Wood -->
+        <div class="row vertical-align mb-5">
+            <div class="col-8 col-md-10">
+                <h6 style="text-align:right">
+                    <strong>Robert Wood</strong><p></p>>
+                    Bob is a Data Scientist with over a decade of quality management and continuous 
+                    improvement experience.  He has an eye for detail and a passion for problem-solving.
+                </h6>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="https://www.linkedin.com/in/robert-rd-wood"><img src="../static/images/robert_wood.png" alt="Robert Wood" style="width:100%;" ></a>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+
+</html>

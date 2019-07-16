@@ -1,4 +1,4 @@
-.container {
+#container-wide {
     width: 100%;
     padding-right: 50px;
     padding-left: 50px;
@@ -7,26 +7,26 @@
   }
 
 @media (min-width: 576px) {
-    .container {
+    #container-wide {
       max-width: 768px !important;
     }
   }
   
   @media (min-width: 768px) {
-    .container {
+    #container-wide {
       max-width: 992px !important;
     }
   }
   
   @media (min-width: 992px) {
-    .container {
+    #container-wide {
       max-width: 1200px !important;
     }
   }
   
 
 @media (min-width: 1200px) {
-    .container {
+    #container-wide {
       max-width: 1600px !important;
     }
   }
@@ -60,4 +60,16 @@
   transition: transform .75s !important;
 }
 
+#bullet-spacing {
+  margin-bottom: 0rem;
+}
 
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
