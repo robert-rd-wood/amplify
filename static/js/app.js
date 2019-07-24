@@ -1,348 +1,276 @@
-// /**
-//  * Coding Challenge - Tip Calculator
-//  * Case Western Reserve University
-//  * Data Analytics Boot Camp
-//  * Robert Wood
-//  */ 
-
-// // Function to calculate results based on input fields
-// function handleCalculate(event) {
-
-//     // Prevent the page from refreshing
-//     d3.event.preventDefault();
-
-//     // Grab values from input fields
-//     var billAmt = d3.select("#bill-amt").property("value");
-//     var tipPct = d3.select("#tip-pct").property("value");
-//     var splitNum = d3.select("#split-num").property("value");
-
-//     // Bill Amount - strip leading $ if exists
-//     if (billAmt[0] == "$") {
-//         billAmt = billAmt.slice(1, billAmt.length);
-//     }
-
-//     // Tip Percentage - strip trailing % if exists
-//     if (tipPct[tipPct.length-1] == "%") {
-//         tipPct = tipPct.slice(0, tipPct.length-1);
-//     }
-
-//     /* If Bill Amount or Desired Tip Percentage are blank, exit the function
-//     (to avoid throwing errors on initial window resizing) */
-//     if (billAmt == "" || tipPct == "") {
-//         return;
-//     }
-
-//     // Declare error flags, to be set if an entry error is detected
-//     var billAmtErr = false;
-//     var tipPctErr = false;
-
-//     // Check to see if Total Bill is a number
-//     if (isNaN(billAmt)) {
-//         // if not, throw an error and set the error flag
-//         alert("Total Bill value must be a number.  Please enter a number and try again.");
-//         billAmtErr = true;
-//     }
-
-//     // Check to see if Total Bill is > 0
-//     if (billAmt <=0) {
-//         // if not, throw an error and set the error flag
-//         alert("Total Bill value must be greater than 0.  Please enter a positive number and try again.");
-//         billAmtErr = true;
-//     }
-    
-//     // Check to see if Desired Tip Percentage is a number
-//     if (isNaN(tipPct)) {
-//         // if not, throw an error and set the error flag
-//         alert("Desired Tip Percentage value must be a number.  Please enter a number and try again.");
-//         tipPctErr = true;
-//     }
-
-//     // Check to see if Desired Tip Percentage is > 0
-//     if (tipPct <=0) {
-//         // if not, throw an error, reset the field, and exit the function
-//         alert("Desired Tip Percentage must be greater than 0.  Please enter a positive number and try again.");
-//         tipPctErr = true;
-//     }
-
-//     // If an error was detected in the Total Bill field, reset the field
-//     if (billAmtErr) {
-//         document.getElementById('bill-amt').value = '';
-//     }
-//     // If an error was detected in the Desired Tip Percentage field, reset the field
-//     if (tipPctErr) {
-//         document.getElementById('tip-pct').value = '';
-//     }
-
-//     // If either of the error flags were set during error checking, exit the function
-//     if (billAmtErr || tipPctErr) {
-//         return;
-//     }
-
-//     // Cast variables as numbers
-//     billAmt = +billAmt;
-//     tipPct = +tipPct;
-//     splitNum = +splitNum;
-
-//     // Calculate tip
-//     var tipAmt = billAmt * (tipPct / 100)
-//     // Calculate split amount
-//     var splitAmt = tipAmt / splitNum;
-
-//     /* Round Tip Amount and Split Amount to two-decimal places,
-//     using a calculation, as .toFixed does not always behave properly
-//     Save as strings to preserve trailing zeroes if they exist */
-//     var tipAmtStr = (Math.round( tipAmt * 100 ) / 100).toFixed(2);
-//     var splitAmtStr = (Math.round( splitAmt * 100 ) / 100).toFixed(2);
-
-//     /* Edge case handling
-//     Increase splitAmt by $.01 if the combined tip is less than tipAmt due to rounding */
-//     if (+splitAmtStr * splitNum < +tipAmtStr) {
-//         splitAmt += .01;
-//         splitAmtStr = splitAmt.toFixed(2);
-//     }
-
-//     // Display results
-//     displayResults(tipAmtStr,splitNum,splitAmtStr);
-
-//     // Clear any previous pie chart and reset the class of the table-pie div
-//     d3.selectAll("#table-pie>div").remove();
-//     d3.select("#table-pie").attr("class","");
-
-//     // If split is chosen, build pie chart with array of split amounts
-//     if (splitNum > 1) {
-//         // Create array of split amounts
-//         var splitAmts = [];
-//         for(var i=0; i<splitNum; i++) {
-//             splitAmts.push(splitAmt);
-//         }
-//         // Build pie chart
-//         buildPie(splitAmts);
-//     }
-// }
-
-// // Function to clear fields and remove Results and pie chart divs
-// function handleClear(event) {
-
-//     // Prevent the page from refreshing
-//     d3.event.preventDefault();
-
-//     // Clear input fields
-//     document.getElementById('bill-amt').value = '';
-//     document.getElementById('tip-pct').value = '';
-//     document.getElementById('split-num').value = '1';
-
-//     // Delete current chart
-//     d3.selectAll("#table-pie>div").remove();
-
-//     // Reset the class of the table-pie div
-//     d3.select("#table-pie").attr("class","");
-
-//     // Delete results
-//     d3.selectAll("#results>div").remove();
-
-//     // Reset the class of the results div
-//     d3.select("#results").attr("class","");
-// }
-
-// // Function to display calculation results
-// function displayResults(tipAmtStr,splitNum,splitAmtStr) {
-
-//     // Select Results div
-//     var results = d3.select("#results");
-
-//     // Assign card class to Results div
-//     results.attr("class","card border-primary mb-3")
-
-//     // Clear any previous results
-//     d3.selectAll("#results>div").remove();
-
-//     // Create a card and display the calculated Tip Amount
-//     results.append("div").text(`Results`).attr("class","card-header");
-//     var resultCardBody = results.append("div").attr("class","card-body");
-//     resultCardBody.append("p").text(`Tip Amount: $${tipAmtStr}`).attr("class","card-text");
-
-//     // If the split option was chosen, display split information
-//     if (splitNum > 1) {
-//         resultCardBody.append("p").text(`Split between ${splitNum} people...`).attr("class","card-text");
-//         resultCardBody.append("p").text(`Tip per Person: $${splitAmtStr}`).attr("class","card-text");    
-//     }
-// }
-
-// // Function to build pie chart with the split amounts
-// function buildPie(splitAmts) {
-
-//     // Create arrays for labels, colors, and text using length of passed value array
-//     var labels = [];
-//     var colors = [];
-//     var splitAmtsFormatted = [];
-//     for(var i=0; i<splitAmts.length; i++) {
-//         labels.push(i+1);
-//         colors.push("#af8555");
-//         splitAmtsFormatted.push(`$${splitAmts[i].toFixed(2)}`);
-//     }
-
-//     // Create trace element using passed array
-//     trace = {
-//         type: 'pie',
-//         labels: labels,
-//         values: splitAmts,
-//         text: splitAmtsFormatted,
-//         textinfo: 'text',
-//         hole: .35,
-//         marker: {
-//             colors: colors,
-//             line: {
-//                 color: "#000000",
-//                 width: 1
-//             },
-//         },
-//         showlegend: false
-//     };
-
-//     // define width of SVG as width of parent element
-//     var pieWidth = document.getElementById('table-pie').offsetWidth - 20;
-
-//     // Create layout element
-//     var layout = {
-//         margin: {
-//             l: 10,
-//             r: 10,
-//             t: 0,
-//             b: 0
-//         },
-//         hovermode: false,
-//         width: pieWidth,
-//         height: pieWidth,
-//         paper_bgcolor: 'rgba(0,0,0,0)',
-//         plot_bgcolor: 'rgba(0,0,0,0)'
-//     };
-    
-//     // Assign data variable for plotting
-//     var data = [trace];
-
-//     // Select Results div
-//     var pieDiv = d3.select("#table-pie");
-
-//     // Assign card class to Pie div
-//     pieDiv.attr("class","card border-primary mb-3")
-
-//     // Display results
-//     pieDiv.append("div").text(`Useful Visualization*`).attr("class","card-header");
-//     var pieCardBody = pieDiv.append("div").attr("class","card-body").attr("id","pie-chart").attr("style","padding:10px");
-
-//     // Draw pie chart
-//     Plotly.newPlot("pie-chart",data,layout,{displayModeBar: false},{responsive: true});
-//     pieCardBody.append("p").text("*Actual usefulness may vary").attr("class","card-text").attr("style","font-size:small"); 
-// }
-
-// // Function to create array and populate Split select dropdown
-// function populateSplit() {
-
-//     // Create array for Split select dropdown
-//     var splitNums = [];
-
-//     // Create array from 1 to 10 (increase '10' below to extend select dropdown)
-//     for(var i=1; i<=10; i++) {
-//         splitNums.push(i);
-//     }
-
-//     // Select html element for Split select dropdown
-//     var splitNum = d3.select("#split-num");
-
-//     // Populate Split select dropdown
-//     splitNums.forEach(function(number) {
-//         var option = splitNum.append("option");
-//         option.text(number);
-//     });
-// }
-
-// // Define variable to hold the Total Bill field
-// var billAmtField = document.getElementById("bill-amt");
-
-// // Add event listener for focusout to reformat entry
-// billAmtField.addEventListener('focusout', (event) => {
-
-//     // Define variable to hold the value entered in the field
-//     var billAmtEntered = event.target.value;
-
-//     // If dollar sign was added, remove it for now
-//     if (billAmtEntered[0] == "$") {
-//         billAmtEntered = billAmtEntered.slice(1,billAmtEntered.length);
-//     }
-
-//     // Check to see if we have ended up with a valid number
-//     if (isNaN(billAmtEntered) || (billAmtEntered == "") || (billAmtEntered < 0)) {
-//         // Do nothing, error will be thrown when Calculate is pressed
-//     }
-//     // If we have a number, cast as a number and reformat the field
-//     else {
-//         billAmtEntered = +billAmtEntered;
-
-//         // Round and display Total Bill to two decimal places
-//         billAmtEntered = (Math.round( billAmtEntered * 100 ) / 100).toFixed(2);
-
-//         // Reformat the field
-//         event.target.value = "$" + billAmtEntered;
-//     }
-// });
-
-// // Define variable to hold the Desired Tip Percentage field
-// var tipPctField = document.getElementById('tip-pct');
-
-// // Add event listener for focusout to reformat entry
-// tipPctField.addEventListener('focusout', (event) => {
-
-//     // Define variable to hold the value entered in the field
-//     var tipPctEntered = event.target.value;
-
-//     // If percent sign was added, remove it for now
-//     if (tipPctEntered[tipPctEntered.length - 1] == "%") {
-//         tipPctEntered = tipPctEntered.slice(0,tipPctEntered.length-1);
-//     }
-
-//     // Check to see if we have ended up with a valid number
-//     if (isNaN(tipPctEntered) || (tipPctEntered == "") || (tipPctEntered < 0)) {
-//         // Do nothing, error will be thrown when Calculate is pressed
-//     }
-//     // If we have a number, cast as a number and reformat the field
-//     else {
-//         tipPctEntered = +tipPctEntered;
-
-//         // Check if the tip was entered as decimal instead of percentage
-//         if (tipPctEntered < 1) {
-//             // multiply by 100
-//             tipPctEntered = tipPctEntered * 100;
-//         }
-//         // Reformat the field
-//         event.target.value = tipPctEntered + "%";
-//     }
-// });
-
-// // Declare variable for Calculate button
-// var calculateButton = d3.select("#calculate-btn");
-
-// // Declare variable for Clear Filter button
-// var clearButton = d3.select("#clear-btn");
-
-// // Define Calculate button action
-// calculateButton.on("click",handleCalculate);
-
-// // Define Clear Filter button action
-// clearButton.on("click",handleClear);
-
-// // Populate Split select dropdown on page load
-// populateSplit();
-
-// /* When the browser window is resized, handleCalculate() is called
-// to generate a rescaled pie chart */
-// d3.select(window).on("resize", handleCalculate);
-
-// /* Add event listener to scroll to bottom of the page to view results
-// (especially useful for mobile) */
-// document.getElementById("calculate-btn").addEventListener("click", function() {
-//     // Scroll down to see results
-//     window.scrollTo(0,document.body.scrollHeight);
-// });
+// Function to calculate results based on input fields
+function handlePredict(event) {
+
+  // Prevent the page from refreshing
+  d3.event.preventDefault();
+
+  // Clear any existing room suggestion
+  d3.select("#room-selection>ul").remove();
+
+  // Clear any existing artist metadata
+  d3.select("#band-metadata>ul").remove();
+
+  // Grab values from input fields
+  var bandName = d3.select("#tags").property("value");
+
+  // If the band name contains a "/", replace it with "---" to pass to metadata route
+  bandName = bandName.replace(/\//g,"---");
+
+  var showDate = d3.select("#datepicker").property("value");
+
+  if (showDate == "") {
+    $("#dialog-date").dialog({
+      autoOpen: false,
+      modal: true,
+      draggable: false
+
+    });
+    $('#dialog-date').dialog('open');
+  }
+
+  // Feed band name into a route which returns artist metadata
+  d3.json(`/metadata/${bandName}`).then( function(data){
+
+    // If the band name was previously formatted to replace a "/", put it back
+    bandName = bandName.replace(/---/g,"/");
+
+    // If a band is entered that is not in the database, set output values manually
+    if (data[0] == 'e') {
+
+      // Output values for Ballroom
+      var totalSales = 38;
+      var ticketPrice = 9;
+      var advanceSales = 0;
+      var barRevenue = 354;
+
+      populateRoom(totalSales);
+
+      // Call function to update gage charts and slider
+      updateDashboard(advanceSales,totalSales,ticketPrice,barRevenue);
+
+      // Populate panel with warning statement (band not found)
+      // Select band-metadata div
+      var metadataDiv = d3.select("#band-metadata");
+
+      // Append <ul> element
+      var metadataUL = metadataDiv.append("ul").attr("class","list-group");
+
+      // Append <li> element
+      var metadataLI = metadataUL.append("li").attr("class","list-group-item");
+
+      // Append <span> with warning message to communicate that the band was not found
+      metadataLI.append("span").html(`<strong>Warning: </strong>This artist (${bandName}) was not found in the database. They might be a smaller local act that would not generate organic ticket sales.  These results represent our best guess.`);
+
+    }
+    else {
+      // Unpack artist metadata and assign to variables
+      bandName = data[0].Artist;
+
+      // If the band name returned by the route doesn't match the input (lowercase input),
+      // Update the text of the input field to match the proper band name
+      if (bandName != d3.select("#tags").property("value")) {
+        document.getElementById('tags').value = bandName;
+      }
+
+      var averageAge = data[0].average_age;
+      var bandGenres = data[0].genre;
+      console.log(bandGenres);
+
+      // If no band genres were returned from the database, display the result more nicely
+      if (bandGenres == null) {
+        bandGenres = "None listed";
+        console.log(bandGenres);
+      }
+
+      var percentMale = 1 - data[0].percent_female;
+      var streamsTransformed = data[0].popularity_transformed;
+      var spotifyURI = data[0].uri;
+
+      // Reformat show date to pass to model route
+      var showDateFormatted = showDate.replace(/\//g,"-");
+
+      // Feed stream count, gender, room selection, age, and date into ML model
+      d3.json(`/model/${streamsTransformed}/${percentMale}/${averageAge}/${showDateFormatted}`).then( function(data){
+
+        // Return advance sales, total sales, ticket price, and bar revenue
+        var totalSales = +Math.round(data[0][0]);
+        var ticketPrice = +Math.round(data[1][0]);
+        var advanceSales = +Math.round(data[2][0]);
+        var barRevenue = +Math.round(data[3][0]);
+        
+        populateRoom(totalSales);
+
+        // Call function to update gage charts and slider
+        updateDashboard(advanceSales,totalSales,ticketPrice,barRevenue);
+
+      });
+
+      var spotifyURL = "https://open.spotify.com/artist/" + spotifyURI;
+      var roundedAge = Math.round(averageAge);
+
+      // Call function to populate band metadata panel on dashboard
+      populateMetadata(bandName,bandGenres,roundedAge,spotifyURL);
+    }
+
+  });
+
+}
+
+// Function to populate band metadata panel on dashboard
+function populateRoom(totalSales) {
+
+  if (totalSales > 200) {
+    var roomSelection = "Large";
+    var roomCapacity = 500;
+  }
+  else {
+    var roomSelection = "Small";
+    var roomCapacity = 150;
+  }
+
+  // Populate panel with room recommendation
+  // Select room-selection div
+  var roomDiv = d3.select("#room-selection");
+
+  // Append <ul> element
+  var roomUL = roomDiv.append("ul").attr("class","list-group");
+
+  // Append <li> element
+  var roomLI = roomUL.append("li").attr("class","list-group-item");
+
+  // Append <span> with warning message to communicate that the band was not found
+  roomLI.append("span").html(`<strong>Room: </strong>${roomSelection} (capacity ${roomCapacity})`);
+
+}
+
+
+// Function to populate band metadata panel on dashboard
+function populateMetadata(bandName,bandGenres,fanAge,spotifyURL) {
+
+  // Select band-metadata div
+  var metadataDiv = d3.select("#band-metadata");
+
+  // Append <ul> element
+  var metadataUL = metadataDiv.append("ul").attr("class","list-group");
+
+  // Append <li> element
+  var metadataLI = metadataUL.append("li").attr("class","list-group-item");
+
+  // Append <span> with band name
+  metadataLI.append("span").html(`Artist Details for <strong>${bandName}</strong>`);
+
+  // Append <hr>
+  metadataLI.append("hr").attr("class","my-1");
+
+  // Append <span> with genres
+  metadataLI.append("span").html(`<strong>Genre(s): </strong>${bandGenres}`);
+
+  // Append <br>
+  metadataLI.append("br");
+
+  // Append <span> with average listener age
+  metadataLI.append("span").html(`<strong>Avg. Listener Age: </strong>${fanAge}`);
+
+  // Append <br>
+  metadataLI.append("br");
+
+  // Append <hr>
+  metadataLI.append("hr").attr("class","my-1");
+
+  // Append link to listen on Spotify
+  var listenLink = metadataLI.append("a").html(`Stream ${bandName} on Spotify`).attr("href",`${spotifyURL}`).attr("target","_blank");
+
+}
+
+// Function to update gage charts and slider
+function updateDashboard(advanceSales,totalSales,ticketPrice,barRevenue) {
+
+  // Calculate missing values needed to update gages
+  var doorSales = totalSales - advanceSales;
+  var ticketRevenue = totalSales * ticketPrice;
+  var totalRevenue = ticketRevenue + barRevenue;
+
+  if (totalSales > 1500) {
+    $("#dialog-sellout").dialog({
+      autoOpen: false,
+      modal: true,
+      draggable: false
+
+    });
+    $('#dialog-sellout').dialog('open');
+  }
+
+  // If ticket price exceeds default max, reset max
+  if (ticketPrice > 50) {
+    slider.noUiSlider.updateOptions({
+      range: {
+          'min': 0,
+          'max': ticketPrice
+      }
+    });
+  }
+  // Else set max to initial value (for multiple successive predictions)
+  else {
+    slider.noUiSlider.updateOptions({
+      range: {
+          'min': 0,
+          'max': 50
+      }
+    });
+  }
+
+  // Update slider
+  slider.noUiSlider.set(ticketPrice);
+
+  // If ticket sales exceeds 500, update gauge values and reset the max value of the gauges
+  if (totalSales > 500) {
+    totalTicketSalesGage.refresh(totalSales,totalSales);
+    advanceTicketSalesGage.refresh(advanceSales,totalSales);
+    doorTicketSalesGage.refresh(doorSales,totalSales);
+  }
+  // Else update the gauge values and reset max to initial value (for multiple successive predictions)
+  else {
+    totalTicketSalesGage.refresh(totalSales,500);
+    advanceTicketSalesGage.refresh(advanceSales,500);
+    doorTicketSalesGage.refresh(doorSales,500);
+  }
+
+  // If total revenue exceeds 30000, update gauge values and reset the max value of the gauges
+  if (totalRevenue > 30000) {
+    totalRevenueGage.refresh(totalRevenue,totalRevenue);
+    ticketRevenueGage.refresh(ticketRevenue,totalRevenue);
+    barRevenueGage.refresh(barRevenue,totalRevenue);
+  }
+  // Else update the gauge values and reset max to initial value (for multiple successive predictions)
+  else {
+    totalRevenueGage.refresh(totalRevenue,30000);
+    ticketRevenueGage.refresh(ticketRevenue,30000);
+    barRevenueGage.refresh(barRevenue,30000);
+  }
+
+}
+
+// Function to update revenue gauges on slider change
+function updateRevenue(newTicketPrice) {
+  // Pull number of total ticket sales from existing gauge
+  var totalTicketSales = totalTicketSalesGage.config.value;
+
+  // Calculate new ticket revenue
+  var newTicketRevenue = totalTicketSales * newTicketPrice;
+
+  // Update ticket revenue gauge
+  ticketRevenueGage.refresh(newTicketRevenue);
+
+  // Pull bar revenue from existing gauge
+  var barRevenue = barRevenueGage.config.value;
+
+  // Calculate new total revenue
+  var newTotalRevenue = newTicketRevenue + barRevenue;
+
+  // Update total revenue gauge
+  totalRevenueGage.refresh(newTotalRevenue);
+  
+}
 
 
 
@@ -353,8 +281,14 @@ function handleClear(event) {
   d3.event.preventDefault();
 
   // Clear input fields
-  document.getElementById('band-name').value = '';
-  document.getElementById('show-date').value = '';
+  document.getElementById('tags').value = '';
+  document.getElementById('datepicker').value = '';
+
+  // Clear room suggestion panel
+  d3.select("#room-selection>ul").remove();
+
+  // Clear metadata panel
+  d3.select("#band-metadata>ul").remove();
 
   // Reset gages to 0
   totalTicketSalesGage.refresh(0);
@@ -367,16 +301,18 @@ function handleClear(event) {
   // Reset slider
   slider.noUiSlider.reset();
 
-  // Check first radio button
-  document.getElementById("large-room").checked = true;
+}
 
+// Format number with commas (for file output revenue values)
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
 
 var totalTicketSalesGage = new JustGage({
     id: 'total-ticket-sales',
-    value: 70,
+    value: 0,
     valueMinFontSize: 25,
     formatNumber: true,
     min: 0,
@@ -398,7 +334,7 @@ var totalTicketSalesGage = new JustGage({
 
   var advanceTicketSalesGage = new JustGage({
     id: 'advance-ticket-sales',
-    value: 50,
+    value: 0,
     valueMinFontSize: 25,
     formatNumber: true,
     min: 0,
@@ -420,7 +356,7 @@ var totalTicketSalesGage = new JustGage({
 
   var doorTicketSalesGage = new JustGage({
     id: 'door-ticket-sales',
-    value: 20,
+    value: 0,
     valueMinFontSize: 25,
     formatNumber: true,
     min: 0,
@@ -442,11 +378,12 @@ var totalTicketSalesGage = new JustGage({
 
   var totalRevenueGage = new JustGage({
     id: 'total-revenue',
-    value: 983,
-    valueMinFontSize: 25,
-    decimals: 2,
+    value: 0,
+    valueMinFontSize: 20,
+    humanFriendly: true,
+    humanFriendlyDecimal: 1,
     min: 0,
-    max: 1000,
+    max: 30000,
     hideMinMax: true,
     pointer: true,
     gaugeWidthScale: 1.0,
@@ -463,11 +400,12 @@ var totalTicketSalesGage = new JustGage({
 
   var ticketRevenueGage = new JustGage({
     id: 'ticket-revenue',
-    value: 275,
-    valueMinFontSize: 25,
-    decimals: 2,
+    value: 0,
+    valueMinFontSize: 20,
+    humanFriendly: true,
+    humanFriendlyDecimal: 1,
     min: 0,
-    max: 1000,
+    max: 30000,
     hideMinMax: true,
     pointer: true,
     gaugeWidthScale: 0.7,
@@ -484,11 +422,12 @@ var totalTicketSalesGage = new JustGage({
 
   var barRevenueGage = new JustGage({
     id: 'bar-revenue',
-    value: 708,
-    valueMinFontSize: 25,
-    decimals: 2,
+    value: 0,
+    valueMinFontSize: 20,
+    humanFriendly: true,
+    humanFriendlyDecimal: 1,
     min: 0,
-    max: 1000,
+    max: 30000,
     hideMinMax: true,
     pointer: true,
     gaugeWidthScale: 0.7,
@@ -519,7 +458,7 @@ noUiSlider.create(slider, {
   // define price range
   range: {
     'min': 0,
-    'max': 100
+    'max': 50
   },
   step: 1,
   // tooltips: true
@@ -531,21 +470,86 @@ var priceDisplay = document.getElementById('price')
 priceDisplay.innerHTML = price;
   
 slider.noUiSlider.on('update', function (values, handle) {
-  priceDisplay.innerHTML = `$${+values[handle]}`;
+  // Pull handle value and assign as new ticket price
+  var newPrice = +values[handle];
+  // Update price display below slider
+  priceDisplay.innerHTML = `$${newPrice}`;
+  // Update revenue gauges on slider change
+  updateRevenue(newPrice);
+});
+
+// Declare variable for Predict button
+var predictButton = d3.select("#predict-btn");
+
+// Declare variable for Clear button
+var clearButton = d3.select("#clear-btn");
+
+// Define Predict button action
+predictButton.on("click",handlePredict);
+
+// Define Clear button action
+clearButton.on("click",handleClear);
+
+
+// JQuery Datepicker script method
+$("#datepicker").datepicker({
+  showAnim: "slideDown",
+  minDate : 0
 });
 
 
+// Load list of all band names on page load
+d3.json(`/bandlist`).then( function(data){
+  
+  var availableTags = data;
 
-// Declare variable for Clear Filter button
-var clearButton = d3.select("#clear-btn");
+  $( "#tags" ).autocomplete({
+    classes: {
+      "ui-autocomplete": "jquery-autocomplete"
+    },
+    autoFocus: true,
+    source: availableTags,
+    minLength: 5
+  });
+});
 
-// Define Clear Filter button action
-clearButton.on("click",handleClear);
+// Event listener to save output summary to .txt file
+$("#btn-save").click( function() {
+  var bandName = d3.select("#tags").property("value");
+  var showDate = d3.select("#datepicker").property("value");
 
-// Enable popovers
-$('#popover').popover();
+  var totalTicketSales = numberWithCommas(totalTicketSalesGage.config.value);
+  var advanceSales = numberWithCommas(advanceTicketSalesGage.config.value);
+  var doorSales = numberWithCommas(doorTicketSalesGage.config.value);
 
-// Dismiss popover on loss of focus
-$('.popover-dismiss').popover({
-  trigger: 'focus'
-})
+  if (totalTicketSales > 200) {
+    var roomSelection = "Large (capacity 500)";
+  }
+  else {
+    var roomSelection = "Small (capacity 150)";
+  }
+
+  var ticketPrice = +slider.noUiSlider.get();
+
+  var totalRevenue = numberWithCommas(totalRevenueGage.config.value);
+  var ticketRevenue = numberWithCommas(ticketRevenueGage.config.value);
+  var barRevenue = numberWithCommas(barRevenueGage.config.value);
+
+  var formatDate = showDate.replace(/\//g,".");
+
+  var text = `Artist: ${bandName}\r\nDate: ${showDate}\r\n\r\nSuggested Room Size: ${roomSelection}\r\n\r\nExpected Total Ticket Sales: ${totalTicketSales} tickets\r\nExpected Advance Ticket Sales: ${advanceSales} tickets\r\nExpected Door Ticket Sales: ${doorSales} tickets\r\n\r\nSuggested Ticket Price: $${ticketPrice}\r\n\r\nExpected Total Revenue: $${totalRevenue}\r\nExpected Ticket Revenue: $${ticketRevenue}\r\nExpected Bar Revenue: $${barRevenue}`;
+  var filename = `${bandName} ${formatDate}`;
+  var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, filename+".txt");
+});
+
+// Tooltip with warning regarding adjusting ticket price
+$('#tooltip').on({
+  "click": function() {
+    $(this).tooltip({ items: "#tooltip", content: "Warning: The model will suggest a ticket price based on historical data. Changing this price will recalculate revenue, but be aware that attendance may also be affected by altering the ticket price."});
+    $(this).tooltip("open");
+  },
+  "mouseout": function() {    
+     $(this).tooltip("disable"); 
+  }
+});

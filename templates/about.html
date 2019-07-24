@@ -8,6 +8,7 @@
   <title>amplify</title>
   <link rel="stylesheet" href="../static/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="shortcut icon" href="static/images/amplify_logo_orange.ico">
 
   <!-- Include required js elements for Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -20,7 +21,7 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-custom navbar-expand-sm navbar-dark bg-primary">
-    <a class="navbar-brand" href="index.html"><img src="../static/images/amplify_logo.png" style="height:30px"></img></a>
+    <a class="navbar-brand" href="/"><img src="../static/images/amplify_logo.png" style="height:30px"></img></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,10 +29,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link active" href="about.html">About</a>
+            <a class="nav-link active" href="/about">About</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="support.html">Support</a>
+            <a class="nav-link" href="/support">Support</a>
         </li>
       </ul>
     </div>
@@ -41,34 +42,38 @@
     <div class="row">
       <!-- Div for logo -->
       <div class="col-md-12 text-center pt-4 mb-3">
-        <img src="../static/images/amplify_2000.png" id="logo"></img>
+        <a href="/"><img src="../static/images/amplify_2000.png" id="logo"></img></a>
         <hr class="my-4">
       </div>
     </div>
     <!-- Div for app summary -->
-    <div style="text-align:center">
-        <h4>The <strong>amplify</strong> team believes in the power of live music.  This project was born out of a desire to see live music continue to thrive.  
-            To that end, <strong>amplify</strong> empowers venues to make informed decisions when booking shows to ensure financial viability and continued 
-            success of the live music scene.</h4>
+    <div style="text-align:left">
+        <h4>At <strong>amplify</strong>, we believe in the power of live music.  Live music is energetic, collaborative, and unpredictable.  Fans have a unique opportunity to connect intimately with artists they love, and artists can connect in the same way with their fans.  There are few things as powerful and invigorating.
+            <br><br>
+            <strong>amplify</strong> is inspired by our desire to bring artists and venues together to help live music flourish.  Using <strong>amplify</strong>, venues can find artists who are well suited for their unique space and artists can find the right venues to attract their fans.
+           <br> <br>
+            Under the hood, <strong>amplify</strong> uses proprietary algorithms that leverage historical sales data, real-time artist popularity, weather, seasonality, fan base composition, and more to help match artists and venues.
+            </h4>
     </div>
     <div class="col-11 col-centered">
         <hr class="my-5">
     </div>
     <div>
         <h5 style="text-align:center"><strong>About the App</strong></h5><br />
-        <h6><strong>amplify</strong> was built using historical data from local music venues, as well as artist data from Spotify(R).  
-            A machine learning model was trained on this data, allowing accurate predictions of ticket sales and revenue, 
-            taking into account various factors including artist popularity, genre, fan demographics, and even the 
-            month and day of week of the show.</h6>
+        <h6 style="line-height: 1.5em"><strong>amplify</strong> was built using historical data from local music venues, as well as artist data from Spotify&reg;.  
+            Machine learning models were trained on this data, allowing accurate predictions of ticket sales and revenue, 
+            taking into account various factors including artist popularity, venue size, fan demographics, and even the 
+            month and day of week of the show. These models predict 4 categories with a range of statistical accuracy (R-squared) to build our full prediction dashboard. Advanced Ticket Sales (.99), Door Ticket Sales (.6), Ticket Price (.38), and Bar Revenue (.78).</h6>
         <div class="col-11 col-centered">
             <hr class="my-5">
         </div>
-        <h5 style="text-align:center"><strong>Technology Used</strong></h5><br />
+        <h5 style="text-align:center"><strong>Tech Stack</strong></h5><br />
         <ul>
-            <li><h6 id="bullet-spacing">Initial data cleaning was performed using Python and the pandas library</h6></li>
+            <li><h6 id="bullet-spacing">Initial data cleaning was performed using Python (e.g., Pandas, Numpy, etc.)</h6></li>
             <li><h6 id="bullet-spacing">Data warehousing is handled using a SQLite database</h6></li>
             <li><h6 id="bullet-spacing">A Flask application is used to handle queries to the database and return data to be displayed on the dashboard</h6></li>
-            <li><h6 id="bullet-spacing">The app front-end was designed using Bootstrap along with multiple JavaScript libraries, including jQuery, Popper.js, and noUiSlider</h6></li>
+            <li><h6 id="bullet-spacing">The app front-end was designed using Bootstrap along with multiple JavaScript libraries, including jQuery and noUiSlider</h6></li>
+            <li><h6 id="bullet-spacing">Modeling was conducted using SKLearn and statsmodels</h6></li>
             <li><h6 id="bullet-spacing">The finished app has been deployed on Heroku</h6></li>
         </ul>
         <div class="col-11 col-centered">
@@ -83,8 +88,7 @@
             <div class="col-8 col-md-10">
                 <h6>
                     <strong>Mike Bowen</strong><p></p>
-                    Mike is the Head of Data Foundations / Marketing Sciences at Spotify, and is a quantitative researcher and 
-                    data storyteller with 15 years of experience designing and conducting research for many of the world’s most recognized brands.
+                    Mike is currently a Staff Researcher at Spotify.  He is a quantitative research specialist and data storyteller with 15 years of experience designing and conducting research for many of the world’s most recognized brands.
                 </h6>
             </div>
         </div>
@@ -133,7 +137,7 @@
         <div class="row vertical-align mb-5">
             <div class="col-8 col-md-10">
                 <h6 style="text-align:right">
-                    <strong>Robert Wood</strong><p></p>>
+                    <strong>Robert Wood</strong><p></p>
                     Bob is a Data Scientist with over a decade of quality management and continuous 
                     improvement experience.  He has an eye for detail and a passion for problem-solving.
                 </h6>

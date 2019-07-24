@@ -700,7 +700,7 @@ JustGage = function(config) {
   if (obj.config.textRenderer) {
     obj.originalValue = obj.config.textRenderer(obj.originalValue);
   } else if (obj.config.humanFriendly) {
-    obj.originalValue = humanFriendlyNumber(obj.originalValue, obj.config.humanFriendlyDecimal) + obj.config.symbol;
+    obj.originalValue = '$' + humanFriendlyNumber(obj.originalValue, obj.config.humanFriendlyDecimal) + obj.config.symbol;
   } else if (obj.config.formatNumber) {
     obj.originalValue = formatNumber(obj.originalValue) + obj.config.symbol;
   } else {
@@ -717,7 +717,7 @@ JustGage = function(config) {
       if (obj.config.textRenderer) {
         obj.txtValue.attr("text", obj.config.textRenderer(Math.floor(currentValue)));
       } else if (obj.config.humanFriendly) {
-        obj.txtValue.attr("text", humanFriendlyNumber(Math.floor(currentValue), obj.config.humanFriendlyDecimal) + obj.config.symbol);
+        obj.txtValue.attr("text", '$' + humanFriendlyNumber(Math.floor(currentValue), obj.config.humanFriendlyDecimal) + obj.config.symbol);
       } else if (obj.config.formatNumber) {
         obj.txtValue.attr("text", formatNumber(Math.floor(currentValue)) + obj.config.symbol);
       } else {
@@ -837,7 +837,7 @@ JustGage.prototype.refresh = function(val, max) {
   if (obj.config.textRenderer) {
     displayVal = obj.config.textRenderer(displayVal);
   } else if (obj.config.humanFriendly) {
-    displayVal = humanFriendlyNumber(displayVal, obj.config.humanFriendlyDecimal) + obj.config.symbol;
+    displayVal = '$' + humanFriendlyNumber(displayVal, obj.config.humanFriendlyDecimal) + obj.config.symbol;
   } else if (obj.config.formatNumber) {
     displayVal = formatNumber((displayVal * 1).toFixed(obj.config.decimals)) + obj.config.symbol;
   } else {

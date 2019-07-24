@@ -49,7 +49,7 @@
   #logo {
     width:75%;
   }
-  #bottom-margin {
+  #bottom-margin, .bottom-margin {
     margin-bottom: 3rem !important;
   }
 }
@@ -72,4 +72,15 @@
 .vertical-align {
   display: flex;
   align-items: center;
+}
+
+.jquery-autocomplete, #dialog-sellout, #dialog-date, #tooltip {
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  color: #5a5a5a;
+  font-size: .9rem;
+}
+
+div.ui-datepicker{
+  font-size:14px;
 }
