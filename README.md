@@ -1,6 +1,6 @@
 <p align="center">
-<img src="static/images/amplify_2000.png" alt="amplify" height="75%" width="75%">
-</p>
+<img src="static/images/amplify_2000.png" alt="amplify" height="60%" width="60%">
+</p>  
 
 
 
