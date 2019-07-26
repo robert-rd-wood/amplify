@@ -74,7 +74,7 @@
   align-items: center;
 }
 
-.jquery-autocomplete, #dialog-sellout, #dialog-date, #tooltip {
+.jquery-autocomplete, #dialog-sellout, #dialog-date {
   font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
   color: #5a5a5a;

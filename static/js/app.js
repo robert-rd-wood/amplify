@@ -74,7 +74,6 @@ function handlePredict(event) {
 
       var averageAge = data[0].average_age;
       var bandGenres = data[0].genre;
-      console.log(bandGenres);
 
       // If no band genres were returned from the database, display the result more nicely
       if (bandGenres == null) {
@@ -110,6 +109,11 @@ function handlePredict(event) {
 
       // Call function to populate band metadata panel on dashboard
       populateMetadata(bandName,bandGenres,roundedAge,spotifyURL);
+
+      // Smooth scroll to top of metadata panel
+      $('html, body').animate({
+        scrollTop: $("#band-metadata").offset().top
+      }, 1000);
     }
 
   });
@@ -178,7 +182,7 @@ function populateMetadata(bandName,bandGenres,fanAge,spotifyURL) {
   metadataLI.append("hr").attr("class","my-1");
 
   // Append link to listen on Spotify
-  var listenLink = metadataLI.append("a").html(`Stream ${bandName} on Spotify`).attr("href",`${spotifyURL}`).attr("target","_blank");
+  metadataLI.append("a").html(`Stream ${bandName} on Spotify`).attr("href",`${spotifyURL}`).attr("target","_blank");
 
 }
 
