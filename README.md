@@ -2,7 +2,7 @@
 <img src="static/images/amplify_2000.png" alt="amplify" height="60%" width="60%">
 </p>  
 
-
+&nbsp;
 
 ### At **amplify**, we believe in the power of live music. Live music is energetic, collaborative, and unpredictable. Fans have a unique opportunity to connect intimately with artists they love, and artists can connect in the same way with their fans. There are few things as powerful and invigorating. 
 
