@@ -1,5 +1,6 @@
-![1-Logo](static/images/amplify_2000.png)
-
+<p align="center">
+<img src="static/images/amplify_2000.png" alt="amplify" height="75%" width="75%">
+</p>
 
 
 
